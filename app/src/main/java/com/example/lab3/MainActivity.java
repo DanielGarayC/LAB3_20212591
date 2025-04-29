@@ -32,16 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Spinners (dropdowns)
         String[] categorias = {"Cultura General", "Libros", "Películas", "Música", "Computación", "Matemática", "Deportes", "Historia"};
-        ArrayAdapter<String> categoriaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
-        categoriaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> categoriaAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, categorias);
+        categoriaAdapter.setDropDownViewResource(R.layout.spinner_item);
         binding.spinnerCategoria.setAdapter(categoriaAdapter);
 
         String[] dificultades = {"fácil", "medio", "difícil"};
-        ArrayAdapter<String> dificultadAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dificultades);
-        dificultadAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> dificultadAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, dificultades);
+        dificultadAdapter.setDropDownViewResource(R.layout.spinner_item);
         binding.spinnerDificultad.setAdapter(dificultadAdapter);
 
-        // Verificación de la conexión a interner :D
+        // Verificación de la conexión a internet :D
         binding.btnComprobarConexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnComenzar.setEnabled(false);
     }
 
-    // Método de botón para comprobar internet
+
     private boolean hayConexionInternet() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager != null) {

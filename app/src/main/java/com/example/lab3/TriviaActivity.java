@@ -3,7 +3,9 @@ package com.example.lab3;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Html;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +32,7 @@ public class TriviaActivity extends AppCompatActivity {
     private List<Question> questionList = new ArrayList<>();
     private int currentQuestionIndex = 0;
     private int correctAnswers = 0;
+    private int sinResponder = 0;
     private int totalQuestions;
     private long totalTimeInMillis;
     private CountDownTimer countDownTimer;
@@ -80,6 +83,14 @@ public class TriviaActivity extends AppCompatActivity {
                 avanzarPregunta();
             }
         });
+        binding.radioGroupOpciones.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1) {
+                    binding.btnSiguiente.setEnabled(true);
+                }
+            }
+        });
     }
 
     private void startTimer() {
@@ -90,6 +101,7 @@ public class TriviaActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
+                sinResponder += totalQuestions - currentQuestionIndex;
                 irAEstadisticas();
             }
         };
@@ -105,31 +117,45 @@ public class TriviaActivity extends AppCompatActivity {
                 .build();
 
         TriviaService apiService = retrofit.create(TriviaService.class);
+        String dificultadApi = mapearDificultad(dificultad);
 
         Call<TriviaRpta> call = apiService.getQuestions(
                 cantidad,
                 categoryId,
-                dificultad.toLowerCase(),
+                dificultadApi.toLowerCase(),
                 "boolean"
         );
 
         call.enqueue(new Callback<TriviaRpta>() {
             @Override
             public void onResponse(Call<TriviaRpta> call, Response<TriviaRpta> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful() && response.body() != null && response.body().getResults() != null && !response.body().getResults().isEmpty()) {
                     questionList = response.body().getResults();
+                    totalQuestions = questionList.size();
                     mostrarPreguntaActual();
                 } else {
-                    Toast.makeText(TriviaActivity.this, "Error en la respuesta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TriviaActivity.this, "No se encontraron preguntas. Regresando al menú.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
             @Override
             public void onFailure(Call<TriviaRpta> call, Throwable t) {
                 Toast.makeText(TriviaActivity.this, "Fallo de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
+    //Mapeado de la dificultad a su nombre en ingles para la consulta
+    private String mapearDificultad(String dificultadEspañol) {
+        switch (dificultadEspañol.toLowerCase()) {
+            case "fácil": return "easy";
+            case "medio": return "medium";
+            case "difícil": return "hard";
+            default: return "easy";
+        }
+    }
+
     //Mostrar la categoría según su número en la consulta en la API
     private int mapearCategoria(String categoria) {
         switch (categoria.toLowerCase()) {
@@ -155,13 +181,18 @@ public class TriviaActivity extends AppCompatActivity {
     }
     //mostrarPreguntas
     private void mostrarPreguntaActual() {
+
         if (currentQuestionIndex < questionList.size()) {
             Question currentQuestion = questionList.get(currentQuestionIndex);
-            binding.textViewPregunta.setText(currentQuestion.getQuestionText());
+            //Esto lo agregué para que no salgan cosas raras en la pregunta por el encoded ;D
+            binding.textViewPregunta.setText(Html.fromHtml(currentQuestion.getQuestionText(), Html.FROM_HTML_MODE_LEGACY));
             binding.radioButtonOpcion1.setText("True");
             binding.radioButtonOpcion2.setText("False");
             binding.radioGroupOpciones.clearCheck();
             binding.textViewContadorPregunta.setText("Pregunta " + (currentQuestionIndex + 1) + "/" + totalQuestions);
+
+            //c desactiva hasta que se responda
+            binding.btnSiguiente.setEnabled(false);
         }
     }
     //Verificado de respuesta
@@ -176,6 +207,7 @@ public class TriviaActivity extends AppCompatActivity {
     }
     //Siguiente pregunta
     private void avanzarPregunta() {
+
         currentQuestionIndex++;
         if (currentQuestionIndex >= totalQuestions) {
             irAEstadisticas();
@@ -190,6 +222,7 @@ public class TriviaActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EstadisticasActivity.class);
         intent.putExtra("correctas", correctAnswers);
         intent.putExtra("total", totalQuestions);
+        intent.putExtra("sinResponder", sinResponder);
         startActivity(intent);
         finish();
     }

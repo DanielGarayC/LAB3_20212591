@@ -69,7 +69,6 @@
             android:textStyle="bold"
             android:layout_gravity="center_vertical" />
 
-        <!-- Contenedor blanco con borde para el cronómetro -->
         <LinearLayout
             android:id="@+id/layoutContador"
             android:layout_width="wrap_content"
@@ -145,13 +144,13 @@
             android:id="@+id/radioButtonOpcion1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Opción 1"/>
+            android:text="True"/>
 
         <RadioButton
             android:id="@+id/radioButtonOpcion2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Opción 2"/>
+            android:text="False"/>
     </RadioGroup>
 
 

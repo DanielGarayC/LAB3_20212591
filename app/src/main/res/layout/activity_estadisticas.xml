@@ -1,10 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EstadisticasActivity">
+    android:background="#F7F5FA">
+
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/fondo_titulo_resultados"
+        android:gravity="center"
+        android:text="Resultados"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutCorrectas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="40dp">
+
+        <TextView
+            android:id="@+id/textViewCorrectasLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correctas:"
+            android:drawableLeft="@drawable/correct_answer_icon"
+            android:drawablePadding="8dp"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewCorrectas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutIncorrectas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutCorrectas"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="40dp">
+
+        <TextView
+            android:id="@+id/textViewIncorrectasLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Incorrectas:"
+            android:drawableLeft="@drawable/wrong_answer_icon"
+            android:drawablePadding="8dp"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewIncorrectas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSinResponder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutIncorrectas"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="40dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textViewSinResponder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sin responder:"
+            android:drawableLeft="@drawable/bad_mood_icon"
+            android:drawablePadding="8dp"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewSinResponderValor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnVolverInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver a Jugar"
+        android:drawableLeft="@drawable/retry_icon"
+        android:drawablePadding="8dp"
+        android:backgroundTint="#1A237E"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/layoutSinResponder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

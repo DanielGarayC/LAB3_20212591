@@ -1,19 +1,30 @@
 package com.example.lab3;
 
-import com.google.gson.annotations.SerializedName;
 
 public class Question {
-    @SerializedName("question")
-    private String questionText;
+    private String category;
+    private String type;
+    private String difficulty;
+    private String question;
+    private String correct_answer;
 
-    @SerializedName("correct_answer")
-    private String correctAnswer;
+    public String getCategory() {
+        return category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
 
     public String getQuestionText() {
-        return questionText;
+        return question;
     }
 
     public String getCorrectAnswer() {
-        return correctAnswer;
+        return correct_answer;
     }
 }
