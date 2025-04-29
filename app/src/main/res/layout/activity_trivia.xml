@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F5FA"
+    android:padding="16dp">
+
+    <!-- Cabecera celeste -->
+    <View
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#B3E5FC"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/textViewTituloJuego"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Listo? Juega!"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        app:layout_constraintTop_toTopOf="@id/headerView"
+        app:layout_constraintBottom_toBottomOf="@id/headerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"/>
+
+    <!-- Categoría -->
+    <TextView
+        android:id="@+id/textViewCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General Knowledge"
+        android:textSize="16sp"
+        android:textColor="#424242"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/headerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Temporizador -->
+    <LinearLayout
+        android:id="@+id/layoutTemporizador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#DCEAD7"
+        android:padding="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewCategoria"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical">
+
+        <!-- Texto "Tiempo restante" -->
+        <TextView
+            android:id="@+id/textViewTiempoRestante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiempo restante"
+            android:textColor="#424242"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical" />
+
+        <!-- Contenedor blanco con borde para el cronómetro -->
+        <LinearLayout
+            android:id="@+id/layoutContador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="4dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iconoCronometro"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/cronometer_icon"
+                android:layout_marginEnd="4dp" />
+
+            <TextView
+                android:id="@+id/textViewTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:20"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#212121"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Contador de pregunta -->
+    <TextView
+        android:id="@+id/textViewContadorPregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pregunta 1/3"
+        android:textSize="16sp"
+        android:background="@drawable/contador_pregunta_bg"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:textColor="#424242"
+        app:layout_constraintTop_toBottomOf="@id/layoutTemporizador"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Texto de la pregunta -->
+    <TextView
+        android:id="@+id/textViewPregunta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cargando pregunta..."
+        android:textSize="18sp"
+        android:textColor="#212121"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewContadorPregunta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Opciones de respuesta -->
+    <RadioGroup
+        android:id="@+id/radioGroupOpciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/textViewPregunta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonOpcion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opción 1"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonOpcion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opción 2"/>
+    </RadioGroup>
+
+    <!-- Botón siguiente -->
+    <Button
+        android:id="@+id/btnSiguiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siguiente"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#3949AB"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupOpciones"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
