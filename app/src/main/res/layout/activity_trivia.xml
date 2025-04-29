@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7F5FA"
-    android:padding="16dp">
+    android:padding="0dp">
 
-    <!-- Cabecera celeste -->
+
     <View
         android:id="@+id/headerView"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="#B3E5FC"
+        android:background="@drawable/fondo_titulo_trivia"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Título -->
     <TextView
         android:id="@+id/textViewTituloJuego"
         android:layout_width="wrap_content"
@@ -27,23 +27,24 @@
         app:layout_constraintBottom_toBottomOf="@id/headerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginBottom="60dp"/>
 
-    <!-- Categoría -->
+
     <TextView
         android:id="@+id/textViewCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="General Knowledge"
-        android:textSize="16sp"
         android:textColor="#424242"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/headerView"
+        app:layout_constraintTop_toTopOf="@id/headerView"
+        app:layout_constraintBottom_toBottomOf="@id/headerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="10dp"/>
 
-    <!-- Temporizador -->
     <LinearLayout
         android:id="@+id/layoutTemporizador"
         android:layout_width="wrap_content"
@@ -51,13 +52,13 @@
         android:orientation="horizontal"
         android:background="#DCEAD7"
         android:padding="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintTop_toBottomOf="@id/textViewCategoria"
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center_vertical">
 
-        <!-- Texto "Tiempo restante" -->
+
         <TextView
             android:id="@+id/textViewTiempoRestante"
             android:layout_width="wrap_content"
@@ -97,7 +98,7 @@
         </LinearLayout>
 
     </LinearLayout>
-    <!-- Contador de pregunta -->
+
     <TextView
         android:id="@+id/textViewContadorPregunta"
         android:layout_width="wrap_content"
@@ -111,9 +112,10 @@
         app:layout_constraintTop_toBottomOf="@id/layoutTemporizador"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="8dp"/>
 
-    <!-- Texto de la pregunta -->
+
     <TextView
         android:id="@+id/textViewPregunta"
         android:layout_width="0dp"
@@ -127,7 +129,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Opciones de respuesta -->
+
     <RadioGroup
         android:id="@+id/radioGroupOpciones"
         android:layout_width="match_parent"
@@ -152,7 +154,7 @@
             android:text="Opción 2"/>
     </RadioGroup>
 
-    <!-- Botón siguiente -->
+
     <Button
         android:id="@+id/btnSiguiente"
         android:layout_width="wrap_content"
